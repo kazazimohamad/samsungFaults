@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SamsungFaults</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_groups">GroupsActivity</string>
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_fault">FaultActivity</string>
+    <string name="title_activity_station">StationActivity</string>
+    <string name="title_activity_station_faults">StationFaultsActivity</string>
+</resources>
