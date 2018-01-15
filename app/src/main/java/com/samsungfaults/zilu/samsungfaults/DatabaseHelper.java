@@ -131,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "`flt_model`TEXT NOT NULL," +
                 "`flt_station`TEXT NOT NULL," +
                 "`flt_fault`TEXT NOT NULL" +
+				"`flt_count`INTEGER NOT NULL" +
                 ");";
 
 
