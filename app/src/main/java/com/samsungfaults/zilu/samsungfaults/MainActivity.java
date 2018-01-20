@@ -3,26 +3,29 @@ package com.samsungfaults.zilu.samsungfaults;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
 
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AddFaultDialog.Adding {
+        implements NavigationView.OnNavigationItemSelectedListener, AddReportDialog.Adding {
 
     private TextView persianDate;
+    private RecyclerView rvReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +40,16 @@ public class MainActivity extends AppCompatActivity
 //        pdformater1.format(pdate);
         persianDate.setText(pdformater1.format(pdate));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        rvReport = findViewById(R.id.rvReport);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvReport.setLayoutManager(layoutManager);
+        rvReport.setHasFixedSize(true);
+
+        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddFaultDialog(MainActivity.this, MainActivity.this).show();
+                new AddReportDialog(MainActivity.this, MainActivity.this).show();
             }
         });
 
@@ -53,6 +61,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getReport();
+
+    }
+
+    private void getReport() {
+        PersianDate date = new PersianDate();
+        String strDate = date.getShYear() + "/" + date.getShMonth() + "/" + date.getShDay();
+        List<ReportModel> reports = new DatabaseHelper(this).getAllReport(strDate);
+        ReportAdapter adapter = new ReportAdapter(this, reports);
+        rvReport.setAdapter(adapter);
     }
 
     @Override
@@ -126,7 +145,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void finishAdding() {
-        //todo refresh
-        Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
+        getReport();
     }
 }

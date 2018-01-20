@@ -10,4 +10,7 @@
     <string name="title_activity_fault">FaultActivity</string>
     <string name="title_activity_station">StationActivity</string>
     <string name="title_activity_station_faults">StationFaultsActivity</string>
+    <string name="station_id">کد ایستگاه:</string>
+    <string name="error_id">کد خطا:</string>
+    <string name="model_code">کد مدل:</string>
 </resources>

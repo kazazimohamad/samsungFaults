@@ -10,6 +10,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import saman.zamani.persiandate.PersianDate;
+
 /**
  * Created by mohamad on 12/15/2017.
  */
@@ -130,8 +132,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "`flt_date`TEXT NOT NULL," +
                 "`flt_model`TEXT NOT NULL," +
                 "`flt_station`TEXT NOT NULL," +
-                "`flt_fault`TEXT NOT NULL" +
-				"`flt_count`INTEGER NOT NULL" +
+                "`flt_fault`TEXT NOT NULL," +
+                "`flt_count`INTEGER NOT NULL" +
                 ");";
 
 
@@ -335,7 +337,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /*
-	 * Updating a group
+     * Updating a group
 	 */
     public int updateModel(ProductModel product) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -368,7 +370,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             db.execSQL("INSERT INTO `stations` (sta_code, sta_en_name, sta_fa_name, sta_grp, sta_detail)" +
                     " VALUES ('" + stationModel.getId() + "','" + stationModel.getEnName() + "'" + ","
-                    + "'" + stationModel.getFaName() + "'" + "," +  stationModel.getGroupId() + ","
+                    + "'" + stationModel.getFaName() + "'" + "," + stationModel.getGroupId() + ","
                     + "'" + stationModel.getDetails() + "')");
         } catch (Exception e) {
             e.printStackTrace();
@@ -403,9 +405,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return models;
     }
 
-    public List<StationModel> getAllStationByGroup(long  id) {
+    public List<StationModel> getAllStationByGroup(long id) {
         List<StationModel> models = new ArrayList<>();
-        String selectQuery = "SELECT * FROM `stations` where `sta_grp` = "+id;
+        String selectQuery = "SELECT * FROM `stations` where `sta_grp` = " + id;
 
         // Log.e(LOG, selectQuery);
 
@@ -496,6 +498,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return groups;
     }
 
+    public List<StationFaultModel> getAllStationFaultsByStationId(long stationFault_id) {
+        ArrayList<StationFaultModel> groups = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * " +
+                "FROM 'station_faults' " +
+                "WHERE "
+                + "sta_flt_station = '" + stationFault_id + "'";
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                StationFaultModel gm = new StationFaultModel();
+                gm.setId(c.getInt((c.getColumnIndex("id"))));
+                gm.setStaFaultCode(c.getString(c.getColumnIndex("sta_flt_code")));
+                gm.setStaFaultName(c.getString(c.getColumnIndex("sta_flt_name")));
+                gm.setStaFaultStationId(c.getString(c.getColumnIndex("sta_flt_station")));
+                // adding to group list
+                groups.add(gm);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return groups;
+
+    }
+
     /**
      * getting station fault count
      */
@@ -509,5 +539,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // return count
         return count;
+    }
+
+    public int insertReport(String model, String stationId, String staFaultCode, int count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        PersianDate date = new PersianDate();
+        String strDate = date.getShYear() + "/" + date.getShMonth() + "/" + date.getShDay();
+        try {
+            db.execSQL("INSERT INTO `faults` (flt_date, flt_model, flt_station, flt_fault, flt_count)" +
+                    " VALUES ('" + strDate + "','" + model + "','" + stationId + "'," +
+                    "'" + staFaultCode + "'," + count + ")");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+    public List<ReportModel> getAllReport(String strDate) {
+        List<ReportModel> reports = new ArrayList<>();
+        String selectQuery = "SELECT * FROM `faults` where `flt_date` = '" + strDate + "'";
+
+        // Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                ReportModel rm = new ReportModel();
+                rm.setId((c.getLong(c.getColumnIndex("id"))));
+                rm.setDate((c.getString(c.getColumnIndex("flt_date"))));
+                rm.setModelCode((c.getString(c.getColumnIndex("flt_model"))));
+                rm.setStationId((c.getString(c.getColumnIndex("flt_station"))));
+                rm.setErrorId((c.getString(c.getColumnIndex("flt_fault"))));
+                rm.setCount((c.getInt(c.getColumnIndex("flt_count"))));
+                // adding to list
+                reports.add(rm);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return reports;
+    }
+
+
+    public int updateReport(long id, int count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("flt_count", count);
+
+        // updating row
+        return db.update("faults", values, "id = " + id, null);
     }
 }

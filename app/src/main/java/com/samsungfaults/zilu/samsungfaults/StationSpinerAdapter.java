@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mohamad on 1/5/2018.
@@ -18,12 +19,12 @@ public class StationSpinerAdapter extends BaseAdapter {
     // Your sent context
     private final Context context;
     // Your custom values for the spinner (User)
-    private ArrayList<StationModel> values;
+    private List<StationModel> values;
     private final LayoutInflater mInflater;
 
 
     public StationSpinerAdapter(Context context,
-                          ArrayList<StationModel> values) {
+                          List<StationModel> values) {
         super();
         this.context = context;
         this.values = values;
