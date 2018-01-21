@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 //        pdformater1.format(pdate);
         persianDate.setText(pdformater1.format(pdate));
 
-        rvReport = findViewById(R.id.rvReport);
+        rvReport = (RecyclerView) findViewById(R.id.rvReport);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvReport.setLayoutManager(layoutManager);
         rvReport.setHasFixedSize(true);

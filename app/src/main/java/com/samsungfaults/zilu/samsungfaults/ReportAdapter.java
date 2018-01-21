@@ -52,7 +52,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             public void onClick(View view) {
                 int count = reportModelList.get(position).getCount();
                 holder.tvCount.setText((count + 1) + "");
-                reportModelList.get(position).setCount(count);
+                reportModelList.get(position).setCount(count+1);
                 int k = new DatabaseHelper(context).updateReport(reportModelList.get(position).getId(), count + 1);
                 Log.i("updateeee", k + "");
             }
@@ -90,12 +90,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         public ReportViewHolder(View itemView) {
             super(itemView);
 
-            tvStation = itemView.findViewById(R.id.tvStation);
-            tvError = itemView.findViewById(R.id.tvError);
-            tvModel = itemView.findViewById(R.id.tvModel);
-            tvCount = itemView.findViewById(R.id.tvCount);
-            btnPlus = itemView.findViewById(R.id.btnPlus);
-            btnMinus = itemView.findViewById(R.id.btnMinus);
+            tvStation = (TextView) itemView.findViewById(R.id.tvStation);
+            tvError = (TextView) itemView.findViewById(R.id.tvError);
+            tvModel = (TextView) itemView.findViewById(R.id.tvModel);
+            tvCount = (TextView) itemView.findViewById(R.id.tvCount);
+            btnPlus = (Button) itemView.findViewById(R.id.btnPlus);
+            btnMinus = (Button) itemView.findViewById(R.id.btnMinus);
         }
     }
 }

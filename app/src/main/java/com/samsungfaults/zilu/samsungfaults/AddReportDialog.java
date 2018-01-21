@@ -52,7 +52,8 @@ public class AddReportDialog extends Dialog implements View.OnClickListener {
         spStation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long id) {
-                List<StationFaultModel> faultModels = new DatabaseHelper(context).getAllStationFaultsByStationId(id);
+                StationModel stationModel = (StationModel) spStation.getSelectedItem();
+                List<StationFaultModel> faultModels = new DatabaseHelper(context).getAllStationFaultsByStationId(stationModel.getId());
                 StationFaultSpinnerAdapter faultAdapter = new StationFaultSpinnerAdapter(context, faultModels);
                 spError.setAdapter(faultAdapter);
             }
@@ -63,7 +64,7 @@ public class AddReportDialog extends Dialog implements View.OnClickListener {
             }
         });
 
-        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
 
 

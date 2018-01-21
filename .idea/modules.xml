@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Samsung Fault.iml" filepath="$PROJECT_DIR$/Samsung Fault.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsungFaults.iml" filepath="$PROJECT_DIR$/samsungFaults.iml" />
     </modules>
   </component>
 </project>

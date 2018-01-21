@@ -498,7 +498,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return groups;
     }
 
-    public List<StationFaultModel> getAllStationFaultsByStationId(long stationFault_id) {
+    public List<StationFaultModel> getAllStationFaultsByStationId(String stationFault_id) {
         ArrayList<StationFaultModel> groups = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
