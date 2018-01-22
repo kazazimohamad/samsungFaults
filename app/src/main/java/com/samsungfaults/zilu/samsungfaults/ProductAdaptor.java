@@ -35,6 +35,10 @@ public class ProductAdaptor extends RecyclerView.Adapter<ProductAdaptor.ProductV
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         holder.tvProductName.setText(models.get(position).getProductName());
+
+        if (position % 2 == 0) {
+            holder.tvProductName.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+        }
     }
 
     @Override

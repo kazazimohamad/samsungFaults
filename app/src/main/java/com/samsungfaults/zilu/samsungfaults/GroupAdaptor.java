@@ -35,6 +35,9 @@ public class GroupAdaptor extends RecyclerView.Adapter<GroupAdaptor.GroupViewHol
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         holder.tvGroupName.setText(models.get(position).getGroupName());
+        if (position % 2 == 0) {
+            holder.tvGroupName.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+        }
     }
 
     @Override

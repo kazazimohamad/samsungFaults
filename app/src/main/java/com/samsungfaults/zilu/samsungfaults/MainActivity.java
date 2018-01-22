@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         PersianDate pdate = new PersianDate();
         PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
 //        pdformater1.format(pdate);
-        persianDate.setText(pdformater1.format(pdate));
+        persianDate.setText(persianDate.getText() + pdformater1.format(pdate));
 
         rvReport = (RecyclerView) findViewById(R.id.rvReport);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

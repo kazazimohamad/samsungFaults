@@ -39,9 +39,11 @@ public class StationFaultsListAdapter extends RecyclerView.Adapter<StationFaults
         holder.txtStationFaultRowCode.setText(models.get(position).getStaFaultCode());
         holder.txtStationFaultRowName.setText(models.get(position).getStaFaultStationId());
         holder.txtStationFaultRowGroup.setText(String.valueOf(models.get(position).getStaFaultName()));
-//        if (position % 2 == 0) {
-//            holder.txtStationRowCode.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
-//        }
+        if (position % 2 == 0) {
+            holder.txtStationFaultRowCode.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.txtStationFaultRowName.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.txtStationFaultRowGroup.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+        }
     }
 
     @Override

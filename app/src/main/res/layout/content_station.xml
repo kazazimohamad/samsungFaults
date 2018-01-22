@@ -37,11 +37,6 @@
         android:hint="Enter details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btnDo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/stationsRecyclerView"

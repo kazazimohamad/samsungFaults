@@ -42,6 +42,8 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         holder.txtStationRowGroup.setText(String.valueOf(models.get(position).getGroupId()));
         if (position % 2 == 0) {
             holder.txtStationRowCode.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.txtStationRowName.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.txtStationRowGroup.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
         }
     }
 

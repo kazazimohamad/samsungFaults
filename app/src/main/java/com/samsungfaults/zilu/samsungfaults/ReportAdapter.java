@@ -47,6 +47,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
         holder.tvCount.setText(reportModelList.get(position).getCount() + "");
 
+        if (position % 2 == 0) {
+            holder.tvStation.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.tvError.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+            holder.tvModel.setBackgroundColor(context.getResources().getColor(R.color.tableOddRow));
+        }
+
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

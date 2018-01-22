@@ -39,16 +39,16 @@ public class StationFaultSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = mInflater.inflate(android.R.layout.simple_spinner_item, viewGroup, false);
-        TextView textView= (TextView) view.findViewById(android.R.id.text1);
+        view = mInflater.inflate(R.layout.group_spinner_item, viewGroup, false);
+        TextView textView= (TextView) view.findViewById(R.id.txtGroupeRowName2);
         textView.setText(faultModels.get(i).getStaFaultName());
         return view;
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        convertView = mInflater.inflate(android.R.layout.simple_spinner_item, parent, false);
-        TextView textView= (TextView) convertView.findViewById(android.R.id.text1);
+        convertView = mInflater.inflate(R.layout.group_spinner_item, parent, false);
+        TextView textView= (TextView) convertView.findViewById(R.id.txtGroupeRowName2);
         textView.setText(faultModels.get(position).getStaFaultName());
         return convertView;
     }

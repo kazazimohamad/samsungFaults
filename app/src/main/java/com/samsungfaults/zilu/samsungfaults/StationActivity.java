@@ -42,13 +42,7 @@ public class StationActivity extends AppCompatActivity implements View.OnClickLi
         databaseHelper = new DatabaseHelper(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(this);
 
         stationsModels = databaseHelper.getAllStation();
         stationListAdaptor = new StationListAdapter(this, stationsModels);
@@ -67,8 +61,7 @@ public class StationActivity extends AppCompatActivity implements View.OnClickLi
 
         // attaching data adapter to spinner
         spData.setAdapter(dataAdapter);
-        btnDo = (Button) findViewById(R.id.btnDo);
-        btnDo.setOnClickListener(this);
+
 
 
     }
@@ -76,18 +69,18 @@ public class StationActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnDo:
-            StationModel stationModel = new StationModel();
-            stationModel.setId(etCode.getText().toString());
-            stationModel.setGroupId(spData.getSelectedItemId());
-            stationModel.setFaName(etFaName.getText().toString());
-            stationModel.setEnName(etEnName.getText().toString());
-            stationModel.setDetails(etDetails.getText().toString());
-            new DatabaseHelper(this).createStation(stationModel);
+            case R.id.fab:
+                StationModel stationModel = new StationModel();
+                stationModel.setId(etCode.getText().toString());
+                stationModel.setGroupId(spData.getSelectedItemId());
+                stationModel.setFaName(etFaName.getText().toString());
+                stationModel.setEnName(etEnName.getText().toString());
+                stationModel.setDetails(etDetails.getText().toString());
+                new DatabaseHelper(this).createStation(stationModel);
 
-            stationsModels.add(stationModel);
-            stationListAdaptor.notifyDataSetChanged();
-            break;
+                stationsModels.add(stationModel);
+                stationListAdaptor.notifyDataSetChanged();
+                break;
         }
     }
 }
