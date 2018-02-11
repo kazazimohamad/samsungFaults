@@ -39,5 +39,7 @@
             android:label="@string/title_activity_station_faults"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
 
 </manifest>

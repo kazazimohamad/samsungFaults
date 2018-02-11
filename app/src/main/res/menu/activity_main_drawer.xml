@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_groups"
             android:icon="@drawable/ic_menu_send"
-            android:title="گروه ها" />
+            android:title="واحدها" />
         <item
             android:id="@+id/nav_models"
             android:icon="@drawable/ic_menu_send"
@@ -18,6 +18,18 @@
             android:id="@+id/nav_stationFaults"
             android:icon="@drawable/ic_menu_send"
             android:title="خطای ایستگاه"/>
+        <item
+            android:id="@+id/nav_exportDb"
+            android:icon="@drawable/ic_menu_send"
+            android:title="استخراج دیتابیس"/>
+        <item
+            android:id="@+id/nav_importDb"
+            android:icon="@drawable/ic_menu_send"
+            android:title="ورود دیتابیس"/>
+        <item
+            android:id="@+id/nav_exportExcel"
+            android:icon="@drawable/ic_menu_send"
+            android:title="خروجی اکسل"/>
 
     </group>
 
