@@ -76,8 +76,8 @@ public class AddReportDialog extends Dialog implements View.OnClickListener {
             case R.id.btnAdd:
                 new DatabaseHelper(getContext()).insertReport(
                         ((ProductModel)spModel.getSelectedItem()).getProductName(),
-                        ((StationModel)spStation.getSelectedItem()).getId(),
-                        ((StationFaultModel)spError.getSelectedItem()).getStaFaultCode(), 1);
+                        ((StationModel)spStation.getSelectedItem()).getFaName(),
+                        ((StationFaultModel)spError.getSelectedItem()).getStaFaultName(), 1);
                 listener.finishAdding();
                 dismiss();
                 break;

@@ -64,19 +64,19 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             }
         });
 
-        holder.btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int count = reportModelList.get(position).getCount();
-                if (count - 1 <= 0) {
-                    Toast.makeText(context, "Invalid Number. Must be > 0", Toast.LENGTH_LONG).show();
-                } else {
-                    holder.tvCount.setText((count - 1) + "");
-                    reportModelList.get(position).setCount(count - 1);
-                    new DatabaseHelper(context).updateReport(reportModelList.get(position).getId(), count - 1);
-                }
-            }
-        });
+//        holder.btnMinus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int count = reportModelList.get(position).getCount();
+//                if (count - 1 <= 0) {
+//                    Toast.makeText(context, "Invalid Number. Must be > 0", Toast.LENGTH_LONG).show();
+//                } else {
+//                    holder.tvCount.setText((count - 1) + "");
+//                    reportModelList.get(position).setCount(count - 1);
+//                    new DatabaseHelper(context).updateReport(reportModelList.get(position).getId(), count - 1);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -91,7 +91,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         private TextView tvModel;
         private TextView tvCount;
         private Button btnPlus;
-        private Button btnMinus;
+        //private Button btnMinus;
 
         public ReportViewHolder(View itemView) {
             super(itemView);
@@ -101,7 +101,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             tvModel = (TextView) itemView.findViewById(R.id.tvModel);
             tvCount = (TextView) itemView.findViewById(R.id.tvCount);
             btnPlus = (Button) itemView.findViewById(R.id.btnPlus);
-            btnMinus = (Button) itemView.findViewById(R.id.btnMinus);
+            //btnMinus = (Button) itemView.findViewById(R.id.btnMinus);
         }
     }
 }
