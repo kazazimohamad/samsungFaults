@@ -60,6 +60,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 holder.tvCount.setText((count + 1) + "");
                 reportModelList.get(position).setCount(count+1);
                 int k = new DatabaseHelper(context).updateReport(reportModelList.get(position).getId(), count + 1);
+                int k2 = new DatabaseHelper(context).updateExcelReport(reportModelList.get(position).getId(), count + 1);
                 Log.i("updateeee", k + "");
             }
         });

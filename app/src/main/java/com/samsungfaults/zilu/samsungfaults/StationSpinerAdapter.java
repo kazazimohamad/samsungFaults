@@ -49,7 +49,7 @@ public class StationSpinerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = mInflater.inflate(R.layout.group_spinner_item, viewGroup, false);
         TextView textView= (TextView) view.findViewById(R.id.txtGroupeRowName2);
-        textView.setText(values.get(i).getId());
+        textView.setText(values.get(i).getFaName());
         return view;
     }
 
@@ -57,7 +57,7 @@ public class StationSpinerAdapter extends BaseAdapter {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(R.layout.group_spinner_item, parent, false);
         TextView textView= (TextView) convertView.findViewById(R.id.txtGroupeRowName2);
-        textView.setText(values.get(position).getId());
+        textView.setText(values.get(position).getFaName());
         return convertView;
     }
 

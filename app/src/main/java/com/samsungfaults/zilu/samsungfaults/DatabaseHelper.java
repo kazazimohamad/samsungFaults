@@ -136,12 +136,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "`flt_count`INTEGER NOT NULL" +
                 ");";
 
+        String faultsForExcelTableSQL = "CREATE TABLE IF NOT EXISTS `excelFaults` (" +
+                "`id`INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "`date`TEXT NOT NULL," +
+                "`model`TEXT NOT NULL," +
+                "`fault_description`TEXT NOT NULL," +
+                "`fault_qty`INTEGER NOT NULL, " +
+                "`fault_code`TEXT NOT NULL, " +
+                "`station_code`TEXT NOT NULL" +
+                ");";
+
 
         db.execSQL(groupsTableSQL);
         db.execSQL(modelsTableSQL);
         db.execSQL(stationTableSQL);
         db.execSQL(stationFaultsTableSQL);
         db.execSQL(faultsTableSQL);
+        db.execSQL(faultsForExcelTableSQL);
     }
 
     @Override
@@ -215,7 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return groups;
     }
 
-    /*
+    /**
  * getting group count
  */
     public int getGroupCount() {
@@ -230,7 +241,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    /*
+    /**
      * Updating a group
 	 */
     public int updateGroup(groupsModel group) {
@@ -244,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(group.getId())});
     }
 
-    /*
+    /**
      * Deleting a group
      */
     public void deleteToDo(long tado_id) {
@@ -322,7 +333,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return models;
     }
 
-    /*
+    /**
  * getting group count
  */
     public int getModelCount() {
@@ -336,7 +347,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    /*
+    /**
      * Updating a group
 	 */
     public int updateModel(ProductModel product) {
@@ -555,6 +566,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return 1;
     }
 
+    public int insertReportFroExcel(String Model, String fault_description, int fault_qty, String fault_code, String station_code) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        PersianDate date = new PersianDate();
+        String M;
+        String D;
+        if (date.getShMonth() > 10 ){
+            M = "." + date.getShMonth();
+        }else {
+            M = ".0" + date.getShMonth();
+        }
+        if (date.getShDay() > 10 ){
+            D = "." + date.getShDay();
+        }else {
+            D = ".0" + date.getShDay();
+        }
+        
+        String strDate = date.getShYear() % 100 + M + D;
+        try {
+            db.execSQL("INSERT INTO `excelFaults` (date, model, fault_description, fault_qty, fault_code, station_code)" +
+                    " VALUES ('" + strDate + "','" + Model + "','" + fault_description + "'," +
+                    fault_qty + ",'" + fault_code + "','" + station_code + "')");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
     public List<ReportModel> getAllReport(String strDate) {
         List<ReportModel> reports = new ArrayList<>();
         String selectQuery = "SELECT * FROM `faults` where `flt_date` = '" + strDate + "'";
@@ -592,4 +630,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // updating row
         return db.update("faults", values, "id = " + id, null);
     }
+
+    public int updateExcelReport(long id, int count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("fault_qty", count);
+
+        // updating row
+        return db.update("excelFaults", values, "id = " + id, null);
+    }
+
 }

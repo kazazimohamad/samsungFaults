@@ -78,6 +78,14 @@ public class AddReportDialog extends Dialog implements View.OnClickListener {
                         ((ProductModel)spModel.getSelectedItem()).getProductName(),
                         ((StationModel)spStation.getSelectedItem()).getFaName(),
                         ((StationFaultModel)spError.getSelectedItem()).getStaFaultName(), 1);
+
+                new DatabaseHelper(getContext()).insertReportFroExcel(
+                        ((ProductModel)spModel.getSelectedItem()).getProductName(),
+                        ((StationFaultModel)spError.getSelectedItem()).getStaFaultName(),
+                        1,
+                        ((StationFaultModel)spError.getSelectedItem()).getStaFaultCode(),
+                        ((StationModel)spStation.getSelectedItem()).getId());
+
                 listener.finishAdding();
                 dismiss();
                 break;

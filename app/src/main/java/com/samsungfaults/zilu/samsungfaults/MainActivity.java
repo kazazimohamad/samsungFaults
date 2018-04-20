@@ -222,6 +222,8 @@ public class MainActivity extends AppCompatActivity
         if (newDb.exists()) {
             try {
                 fileUtils.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
+                Toast.makeText(getBaseContext(), "دیتابیس با موفقیت وارد شد",
+                        Toast.LENGTH_LONG).show();
             } catch (IOException e) {
                 Toast.makeText(getBaseContext(), "خطا در ورود دیتابیس",
                         Toast.LENGTH_LONG).show();
@@ -248,7 +250,7 @@ public class MainActivity extends AppCompatActivity
         String fileName = "faults_" + pdformater.format(pdate) + ".xls";
 
         sqliteToExcel = new SQLiteToExcel(this, "SamsungFaults.db", directory_path);
-        sqliteToExcel.exportSingleTable("faults", fileName, new SQLiteToExcel.ExportListener() {
+        sqliteToExcel.exportSingleTable("excelFaults", fileName, new SQLiteToExcel.ExportListener() {
             @Override
             public void onStart() {
 
